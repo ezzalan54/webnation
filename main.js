@@ -1,6 +1,10 @@
 import AOS from 'aos';
 import Swiper from 'swiper';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import emailjs from '@emailjs/browser';
+
+// تهيئة EmailJS
+emailjs.init("ERCHjijQ65pCFNf_4"); // قم باستبدال YOUR_PUBLIC_KEY بالمفتاح العام الخاص بك من EmailJS
 
 // تهيئة مكتبة AOS للتأثيرات الحركية
 AOS.init({
@@ -118,28 +122,35 @@ window.handleSubmit = async (event) => {
         return false;
     }
 
-    // إرسال البيانات
-    try {
-        const formData = {
-            name,
-            email,
-            phone,
-            message,
-            to: 'ezzalan54@gmail.com'
-        };
+    // تعطيل زر الإرسال
+    const submitButton = event.target.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
 
-        // هنا يمكن إضافة كود لإرسال البيانات إلى الخادم
-        // لأغراض العرض، سنقوم بمحاكاة عملية الإرسال
-        await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+        // إرسال البريد الإلكتروني باستخدام EmailJS
+        await emailjs.send(
+            "service_6jk352s", // قم باستبدال YOUR_SERVICE_ID بمعرف الخدمة الخاص بك
+            "template_pwh8uj5", // قم باستبدال YOUR_TEMPLATE_ID بمعرف القالب الخاص بك
+            {
+                to_email: "ezzalan54@gmail.com",
+                from_name: name,
+                from_email: email,
+                phone: phone,
+                message: message,
+            }
+        );
 
         // إظهار رسالة نجاح
         showNotification('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً', 'success');
 
         // إعادة تعيين النموذج
         document.getElementById('contactForm').reset();
-
     } catch (error) {
+        console.error('Error sending email:', error);
         showNotification('حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى', 'error');
+    } finally {
+        // إعادة تفعيل زر الإرسال
+        submitButton.disabled = false;
     }
 
     return false;
