@@ -4,7 +4,14 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import emailjs from '@emailjs/browser';
 
 // تهيئة EmailJS
-emailjs.init("ERCHjijQ65pCFNf_4"); // قم باستبدال YOUR_PUBLIC_KEY بالمفتاح العام الخاص بك من EmailJS
+emailjs.init("ERCHjijQ65pCFNf_4");
+
+// دالة إرسال رسالة واتساب
+window.sendWhatsAppMessage = (packageName) => {
+    const message = `مرحباً، أود الاستفسار عن ${packageName}`;
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/212601754736?text=${encodedMessage}`, '_blank');
+};
 
 // تهيئة مكتبة AOS للتأثيرات الحركية
 AOS.init({
@@ -122,35 +129,24 @@ window.handleSubmit = async (event) => {
         return false;
     }
 
-    // تعطيل زر الإرسال
-    const submitButton = event.target.querySelector('button[type="submit"]');
-    submitButton.disabled = true;
-
+    // إرسال البيانات
     try {
-        // إرسال البريد الإلكتروني باستخدام EmailJS
-        await emailjs.send(
-            "service_6jk352s", // قم باستبدال YOUR_SERVICE_ID بمعرف الخدمة الخاص بك
-            "template_pwh8uj5", // قم باستبدال YOUR_TEMPLATE_ID بمعرف القالب الخاص بك
-            {
-                to_email: "ezzalan54@gmail.com",
-                from_name: name,
-                from_email: email,
-                phone: phone,
-                message: message,
-            }
-        );
+        await emailjs.send("service_id", "template_id", {
+            from_name: name,
+            from_email: email,
+            phone: phone,
+            message: message,
+            to_email: 'ezzalan54@gmail.com'
+        });
 
         // إظهار رسالة نجاح
         showNotification('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً', 'success');
 
         // إعادة تعيين النموذج
         document.getElementById('contactForm').reset();
+
     } catch (error) {
-        console.error('Error sending email:', error);
         showNotification('حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى', 'error');
-    } finally {
-        // إعادة تفعيل زر الإرسال
-        submitButton.disabled = false;
     }
 
     return false;

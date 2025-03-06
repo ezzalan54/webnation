@@ -200,72 +200,102 @@ section {
 }
 
 /* قسم الباقات */
+.pricing {
+    background: var(--light-bg);
+    padding: 100px 0;
+}
+
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 20px;
+    margin-bottom: 40px;
+    font-weight: 600;
 }
 
 .price-card {
     background: var(--white);
-    padding: 40px;
-    border-radius: 10px;
+    padding: 40px 35px;
+    border-radius: 15px;
     text-align: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    min-width: 380px;
 }
 
 .price-card h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    padding: 12px 25px;
+    font-size: 20px;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    padding: 10px 20px;
     border-radius: 30px;
     display: inline-block;
-    margin-top: -20px;
-    color: var(--primary-color);
+    background: var(--light-bg);
 }
 
-.price-card:nth-child(1) h3 {
-    background: var(--light-blue);
+.price-tag {
+    margin: 20px 0;
+    position: relative;
 }
 
-.price-card:nth-child(2) h3 {
-    background: var(--light-purple);
-}
-
-.price-card:nth-child(3) h3 {
-    background: var(--light-green);
-}
-
-.price-card.featured {
-    transform: scale(1.05);
-    border: 2px solid var(--primary-color);
-}
-
-.price-card .price {
-    font-size: 48px;
+.price {
+    font-size: 36px;
     font-weight: 700;
     color: var(--primary-color);
+}
+
+.plan-name {
+    display: block;
+    color: #666;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.plan-description {
+    color: #666;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+.plan-features {
+    text-align: right;
     margin: 20px 0;
 }
 
-.price-card ul {
+.feature-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.plan-features ul {
     list-style: none;
-    margin-bottom: 30px;
-    padding: 0 20px;
+    padding: 0;
 }
 
-.price-card ul li {
-    margin-bottom: 15px;
-    color: var(--text-color);
+.plan-features ul li {
+    margin-bottom: 8px;
+    padding-right: 25px;
     position: relative;
-    padding-right: 30px;
-    text-align: right;
+    color: var(--text-color);
+    font-size: 14px;
+    line-height: 1.4;
 }
 
-.price-card ul li::before {
+.plan-features ul li::before {
     content: '\f00c';
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
@@ -274,32 +304,74 @@ section {
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+    font-size: 12px;
+}
+
+.plan-note {
+    background: var(--light-bg);
+    padding: 12px;
+    border-radius: 8px;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.plan-note i {
+    color: var(--primary-color);
+    font-size: 16px;
+}
+
+.plan-note p {
+    color: var(--text-color);
+    font-size: 12px;
+    margin: 0;
 }
 
 .price-card .cta-button {
     background: var(--primary-color);
     color: var(--white);
-    padding: 12px 35px;
+    padding: 10px 25px;
     border-radius: 30px;
     font-weight: 600;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     text-decoration: none;
     transition: var(--transition);
-    border: 2px solid var(--primary-color);
+    margin-top: 15px;
+    font-size: 14px;
 }
 
 .price-card .cta-button:hover {
-    background: transparent;
-    color: var(--primary-color);
+    background: var(--secondary-color);
     transform: translateY(-3px);
 }
 
-.price-card:hover {
-    transform: translateY(-10px);
+.price-card .cta-button i {
+    transition: var(--transition);
 }
 
-.price-card.featured:hover {
-    transform: scale(1.05) translateY(-10px);
+.price-card .cta-button:hover i {
+    transform: translateX(-5px);
+}
+
+.price-card.featured {
+    transform: scale(1.05);
+    border: 2px solid var(--primary-color);
+}
+
+.price-card.featured::before {
+    content: 'الأكثر طلباً';
+    position: absolute;
+    top: 20px;
+    right: -35px;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 40px;
+    transform: rotate(45deg);
+    font-size: 12px;
+    font-weight: 600;
 }
 
 /* قسم الأعمال */
@@ -383,6 +455,7 @@ section {
     transition: var(--transition);
     text-decoration: none;
     z-index: 1000;
+    animation: pulse 2s infinite;
 }
 
 .whatsapp-button i {
@@ -414,10 +487,6 @@ section {
     }
 }
 
-.whatsapp-button {
-    animation: pulse 2s infinite;
-}
-
 /* Footer */
 .footer {
     background: var(--primary-color);
@@ -436,45 +505,6 @@ section {
     text-align: center;
     padding-top: 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* التجاوب مع الشاشات */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
-    
-    .mobile-menu-btn {
-        display: block;
-    }
-    
-    .hero-content h1 {
-        font-size: 36px;
-    }
-    
-    .price-card.featured {
-        transform: none;
-    }
-
-    .whatsapp-button {
-        padding: 12px;
-        border-radius: 50%;
-    }
-
-    .whatsapp-button::after {
-        display: none;
-    }
-
-    .whatsapp-button i {
-        margin: 0;
-        font-size: 28px;
-    }
-}
-
-/* تحسينات الأداء */
-img {
-    max-width: 100%;
-    height: auto;
 }
 
 /* قسم تواصل معنا */
@@ -580,4 +610,214 @@ img {
 
 .notification.show {
     opacity: 1;
+}
+
+/* قسم الخدمات الأخرى */
+.other-services {
+    background: var(--light-bg);
+    padding: 80px 0;
+}
+
+.other-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.service-box {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.service-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    transition: var(--transition);
+}
+
+.portfolio-service::before {
+    background: linear-gradient(to right, #ff6b6b, #feca57);
+}
+
+.logo-service::before {
+    background: linear-gradient(to right, #4834d4, #686de0);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: var(--light-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    transition: var(--transition);
+}
+
+.portfolio-service .service-icon {
+    color: #ff6b6b;
+}
+
+.logo-service .service-icon {
+    color: #4834d4;
+}
+
+.service-box:hover {
+    transform: translateY(-10px);
+}
+
+.service-box:hover .service-icon {
+    transform: scale(1.1);
+}
+
+.service-box h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.service-price {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 15px 0;
+}
+
+.service-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: right;
+}
+
+.service-box ul li {
+    margin-bottom: 12px;
+    padding-right: 25px;
+    position: relative;
+    color: var(--text-color);
+}
+
+.service-box ul li::before {
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #22c55e;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.service-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 30px;
+    background: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.service-button:hover {
+    background: var(--secondary-color);
+    transform: translateX(-5px);
+}
+
+.service-button i {
+    transition: var(--transition);
+}
+
+.service-button:hover i {
+    transform: translateX(-5px);
+}
+
+/* التجاوب مع الشاشات */
+@media (max-width: 1400px) {
+    .pricing-grid {
+        max-width: 1200px;
+    }
+    .price-card {
+        min-width: 320px;
+    }
+}
+
+@media (max-width: 992px) {
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 900px;
+    }
+    
+    .price-card.featured {
+        grid-column: span 2;
+    }
+
+    .price-card {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .hero-content h1 {
+        font-size: 36px;
+    }
+    
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+    
+    .price-card.featured {
+        grid-column: auto;
+        transform: none;
+    }
+    
+    .price-card {
+        margin: 0 15px;
+    }
+
+    .whatsapp-button {
+        padding: 12px;
+        border-radius: 50%;
+    }
+
+    .whatsapp-button::after {
+        display: none;
+    }
+
+    .whatsapp-button i {
+        margin: 0;
+        font-size: 28px;
+    }
+    
+    .other-services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .service-box {
+        margin: 0 15px;
+    }
 }
