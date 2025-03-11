@@ -154,21 +154,43 @@ section {
 /* قسم الخدمات */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .service-card {
-    background: var(--white);
-    padding: 30px;
-    border-radius: 10px;
+    background: linear-gradient(135deg, var(--white) 0%, var(--light-bg) 100%);
+    padding: 40px 30px;
+    border-radius: 15px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.service-card:hover::before {
+    opacity: 1;
 }
 
 .service-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .service-card i {
@@ -206,10 +228,11 @@ section {
 }
 
 .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    max-width: 1600px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -223,15 +246,18 @@ section {
 }
 
 .price-card {
-    background: var(--white);
+    flex: 1;
+    min-width: 350px;
+    max-width: 400px;
+    background: linear-gradient(135deg, var(--white) 0%, var(--light-bg) 100%);
     padding: 40px 35px;
-    border-radius: 15px;
+    border-radius: 20px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    min-width: 380px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .price-card h3 {
@@ -358,6 +384,7 @@ section {
 
 .price-card.featured {
     transform: scale(1.05);
+    background: linear-gradient(135deg, var(--white) 0%, var(--light-bg) 100%);
     border: 2px solid var(--primary-color);
 }
 
@@ -626,14 +653,38 @@ section {
 }
 
 .service-box {
-    background: var(--white);
-    border-radius: 15px;
+    background: linear-gradient(135deg, var(--white) 0%, var(--white) 100%);
+    border-radius: 20px;
     padding: 40px 30px;
     text-align: center;
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.service-box .plan-note {
+    background: linear-gradient(135deg, var(--white) 0%, var(--light-bg) 100%);
+    padding: 15px;
+    border-radius: 12px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.service-box .plan-description {
+    color: #666;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+.portfolio-service .plan-description {
+    font-size: 14px;
+    color: #666;
+    margin: 15px 0;
 }
 
 .service-box::before {
@@ -747,32 +798,36 @@ section {
     transform: translateX(-5px);
 }
 
-/* التجاوب مع الشاشات */
-@media (max-width: 1400px) {
+/* تحديث التجاوب مع الشاشات */
+@media (max-width: 1200px) {
     .pricing-grid {
-        max-width: 1200px;
-    }
-    .price-card {
-        min-width: 320px;
-    }
-}
-
-@media (max-width: 992px) {
-    .pricing-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 900px;
+        gap: 20px;
     }
     
-    .price-card.featured {
-        grid-column: span 2;
-    }
-
     .price-card {
-        min-width: auto;
+        min-width: 300px;
     }
 }
 
 @media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pricing-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .price-card {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .price-card.featured {
+        transform: none;
+    }
+    
     .nav-links {
         display: none;
     }
@@ -785,20 +840,6 @@ section {
         font-size: 36px;
     }
     
-    .pricing-grid {
-        grid-template-columns: 1fr;
-        max-width: 500px;
-    }
-    
-    .price-card.featured {
-        grid-column: auto;
-        transform: none;
-    }
-    
-    .price-card {
-        margin: 0 15px;
-    }
-
     .whatsapp-button {
         padding: 12px;
         border-radius: 50%;
